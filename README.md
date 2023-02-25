@@ -60,4 +60,24 @@ Note how it is different when you login as student in which you only have access
 ![7](https://user-images.githubusercontent.com/105813102/221369088-b62983c9-b13c-41d8-90ac-d3544fd21ef0.JPG)
 ![8](https://user-images.githubusercontent.com/105813102/221369097-3c02b218-b026-4355-b9b6-e3799ea77b90.JPG)
 
+<h2>Major components</h2>
+
+<strong>Redux Store</strong>: in src/app there is the redux store created using redux toolkit that acts as the main store for the app. The store is used because different components are accessing and editing the same data so the redux store keeps everything consistent and synchronized. 
+
+<br/>
+src/app/api contains the main api slice to fetch and manipulate data from the api (the api is created using node and you can access the code for it here: https://github.com/Seif-Mohamed2/University-IT-Tickets-api ) 
+
+
+There are 4 apiSlice files for each feature, all of them inject additional endpoints to the main apliSlice file. 
+<br/><br/>
+
+<strong>Authentication</strong>: src/features/auth/RequireAuth is wrapped around all routes dash routes in index.js and it allows users with specific roles to access specific data.  
+<br/> src/hooks/useAuth provides the application with the current user cookie. Using cookie token content the application is able to provide the necessary data for this user and prohibit them from accessing data they shouldn’t be accessing. 
+<br/>
+<h2>How to run</h2> 
+ 
+```powershell
+npm start
+```
+
 
