@@ -392,6 +392,10 @@ a:focus-visible {
   margin-bottom: 1em;
 }
 
+.form-tickets{
+  display: flex;
+  flex-direction: column;
+}
 .form {
   color: #0F3057;
   background-color: #f0f0f0;
@@ -665,4 +669,13 @@ input:checked + .slider:before {
 
 .edit-user-button{
   margin: auto 10px auto 10px;
+}
+
+.time-margin{
+  margin: auto 30px auto 30px;
+}
+
+.tickets-buttons{
+  margin-top: 20px;
+  align-self: center;
 }

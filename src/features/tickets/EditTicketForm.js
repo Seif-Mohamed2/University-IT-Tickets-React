@@ -4,8 +4,6 @@ import {
   useDeleteTicketMutation,
 } from "./ticketsApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
 import { useUpdateUserMutation } from "../users/usersApiSlice";
 
@@ -128,22 +126,25 @@ const EditTicketForm = ({ ticket, users, students }) => {
       );
     });
     options_tab = (
-      <div>
+      <div className="form-group">
+      <div className="assign-form">
         <label
-          className="form__label form__checkbox-container"
+          className="form-label"
           htmlFor="username"
         >
-          ASSIGNED TO:
+          ASSIGNED TO
         </label>
+        <br/>
         <select
           id="username"
           name="username"
-          className="form__select"
+          className="form-input assign-list"
           value={userId}
           onChange={onUserIdChanged}
         >
           {options}
         </select>
+      </div>
       </div>
     );
   }
@@ -154,41 +155,30 @@ const EditTicketForm = ({ ticket, users, students }) => {
 
   const errContent = (error?.data?.message || delerror?.data?.message || errorUser?.data?.message) ?? "";
   let deleteButton = null;
-  if (isManager || isAdmin) {
+  if (isManager || isAdmin || isStudent) {
     deleteButton = (
       <button
-        className="icon-button"
-        title="Delete"
-        onClick={onDeleteTicketClicked}
-      >
-        <FontAwesomeIcon icon={faTrashCan} />
-      </button>
+                    className="form-button edit-user-button"
+                    title="Delete"
+                    onClick={onDeleteTicketClicked}
+                >
+                    Delete
+                </button>
     );
   }
   const content = (
-    <>
+    <div className="form-container">
       <p className={errClass}>{errContent}</p>
-
-      <form className="form" onSubmit={(e) => e.preventDefault()}>
+      <form className="form form-tickets" onSubmit={(e) => e.preventDefault()}>
         <div className="form__title-row">
-          <h2>Edit Ticket #{ticket.ticket}</h2>
-          <div className="form__action-buttons">
-            <button
-              className="icon-button"
-              title="Save"
-              onClick={onSaveTicketClicked}
-              disabled={!canSave}
-            >
-              <FontAwesomeIcon icon={faSave} />
-            </button>
-            {deleteButton}
-          </div>
+          <h2>EDIT TICKET #{ticket.ticket}</h2>
         </div>
-        <label className="form__label" htmlFor="ticket-title">
-          Title:
+        <div className="form-group">
+        <label className="form-label" htmlFor="ticket-title">
+          TITLE
         </label>
         <input
-          className={`form__input ${validTitleClass}`}
+          className={`form-input ${validTitleClass}`}
           id="ticket-title"
           name="title"
           type="text"
@@ -196,69 +186,62 @@ const EditTicketForm = ({ ticket, users, students }) => {
           value={title}
           onChange={onTitleChanged}
         />
-
-        <label className="form__label" htmlFor="ticket-text">
-          Text:
+      </div>
+      <div className = "form-group">
+        <label className="form-label" htmlFor="ticket-text">
+          TEXT
         </label>
         <textarea
-          className={`form__input form__input--text ${validTextClass}`}
+          className={`form-input form__input--text ${validTextClass}`}
           id="ticket-text"
           name="text"
           value={text}
           onChange={onTextChanged}
-        />
-        <div className="">
-          <div className="form__divider">
-            <div className="user_student_form_container">
-              <div className="ticket_edit_form_user">
-                {options_tab}
-              </div>
-              {!isStudent && <div className="student_input">
-                <label className="form__input student_input" htmlFor="Student">
-                  STUDENT:
-                </label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  className="form__select"
-                  value={studentName}
-                  onChange={handleStudentNameChange}
-                  autoComplete="off"
-                ></input>
-                {showSuggestions && studentName !== "" && (
-                  <ul className="students_ul">
-                    {filteredSuggestions.map((suggestion) => (
-                      <li
-                        className="student_li"
-                        key={suggestion.id}
-                        onClick={() => {
-                          handleOnStudentClicked(suggestion);
-                        }}
-                      >
-                        {suggestion.username}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>}
-            </div>
-          </div>
+        /></div>
+
+        <div class=" user_student_form_container">
+      {options_tab}
+      {!isStudent && <div className="form-group">
+      <label class="form-label" for="username">STUDENT</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        class="form-input"
+        value={studentName}
+        onChange={handleStudentNameChange}
+        autoComplete="off"
+      />
+      {showSuggestions && studentName !== "" && (
+        <ul class="form-suggestions">
+          {filteredSuggestions.map((suggestion) => (
+            <li
+              class="form-suggestion"
+              key={suggestion.id}
+              onClick={() => handleOnStudentClicked(suggestion)}
+            >
+              {suggestion.username}
+            </li>
+          ))}
+        </ul>
+      )}
+      </div>}
+    </div>
           <div className="form_created_time">
-            <p className="ticket_edit_last_row">
-              Created:
+            <p className="form-label">
+              CREATED
               <br />
               {created}
             </p>
-            <p className="ticket_edit_last_row">
-              Updated:
+            <p className="form-label time-margin">
+              UPDATED
               <br />
               {updated}
             </p>
-            <label className="ticket_edit_last_row" htmlFor="ticket-completed">
-              WORK COMPLETE:
+            <label className="form-label" htmlFor="ticket-completed">
+              WORK COMPLETE
               <input
-                className="form__checkbox"
+                className="form-checkbox"
                 id="ticket-completed"
                 name="completed"
                 type="checkbox"
@@ -267,9 +250,14 @@ const EditTicketForm = ({ ticket, users, students }) => {
               />
             </label>
           </div>
-        </div>
+        <div className="side-buttons tickets-buttons">
+                <button class="form-button edit-user-button" title="Save" onClick={onSaveTicketClicked} disabled={!canSave}>
+                    Save
+                </button>
+                {deleteButton}
+                </div>
       </form>
-    </>
+    </div>
   );
 
   return content;
