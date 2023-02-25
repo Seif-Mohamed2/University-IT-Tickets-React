@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+University-IT-Tickets 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<h2>Introduction</h2>
+University-IT-Tickets Is a full-stack application that serves students who have technical issues with their computers, university accounts, etc. In the platform they can sign in with their credentials and when they are logged in students are able to create tickets. Each created ticket gets assigned to an employee (with an algorithm that ensures each employee gets an equal number of tickets). <br/><br/>
 
-In the project directory, you can run:
+On the other side of the platform, employees are able to login and browse the tickets that got assigned to them where they can review it and mark it as completed once the issue is solved. In addition employees are able to create tickets and assign them to specific student (in case a student makes a request over phone or email). <br/>
 
-### `npm start`
+In addition, an user can be an employee or a manager. Managers have more authorities (they are able to create and delete employees and students). <br/>
+<br/>
+You can access the website through this link: 
+https://university-it-tickets.onrender.com
+<br/><br/>
+To login as Manager or Admin:<br/>
+Username: seifm<br/>
+password : aaaa<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To login as Employee:<br/>
+Username: Employee1<br/>
+password : aaaa<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To login as Student:<br/>
+Username: student1<br/>
+password : aaaa<br/>
 
-### `npm test`
+Note: it’s case sensitive. <br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<h2>Platform views and functionality</h2>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once you open the platform you get to the login component, which does not require any authentication to access. Then you need to login:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![1](https://user-images.githubusercontent.com/105813102/221369033-627c770f-2f46-46ac-847a-d5d197eb93e2.JPG)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you login as Admin you get the dashboard that gives you full control over the platform: 
 
-### `npm run eject`
+![2](https://user-images.githubusercontent.com/105813102/221369042-35ed32df-946a-44ad-9c6a-33488c5c6edc.JPG)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+You have options to: view or edit tickets, view or edit students, view or edit users(employees). 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can access tickets list:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![3](https://user-images.githubusercontent.com/105813102/221369048-a5b3a1b9-2be4-4cd9-abba-2c88aa6a29df.JPG)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You can edit or create new Ticket: 
 
-## Learn More
+![4](https://user-images.githubusercontent.com/105813102/221369066-52ca56a9-ea8d-4c0f-991e-10c648e9294f.JPG)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Same thing with users and students lists: 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![5](https://user-images.githubusercontent.com/105813102/221369071-00a67e8c-8edb-4b5f-9e3d-e516019bb2cb.JPG)
 
-### Code Splitting
+You can also edit student or user(employee)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![6](https://user-images.githubusercontent.com/105813102/221369080-8c214dff-7178-4a60-be81-f25d64e6f78e.JPG)
 
-### Analyzing the Bundle Size
+Header components have hyperlinks to navigate to all options you can access. While footer have your username and your status. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Note how it is different when you login as student in which you only have access to your tickets and when you create a new ticket you don’t have the option of assigning a specific user to it. 
+![7](https://user-images.githubusercontent.com/105813102/221369088-b62983c9-b13c-41d8-90ac-d3544fd21ef0.JPG)
+![8](https://user-images.githubusercontent.com/105813102/221369097-3c02b218-b026-4355-b9b6-e3799ea77b90.JPG)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
