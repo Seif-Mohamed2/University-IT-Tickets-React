@@ -86,8 +86,8 @@ const NewStudentForm = () => {
                     onChange={onPasswordChanged}
                 />
                 </div>
-                <div class="form-actions">
-                <button class="form-button new-student-button" title="Save" disabled={!canSave}>
+                <div className="form-actions">
+                <button className="form-button new-student-button" title="Save" disabled={!canSave}>
                     Save
                 </button>
                 </div>

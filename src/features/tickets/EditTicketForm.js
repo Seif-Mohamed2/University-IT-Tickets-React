@@ -18,7 +18,7 @@ const EditTicketForm = ({ ticket, users, students }) => {
     { isSuccess: isDelSuccess, isError: isDelError, error: delerror },
   ] = useDeleteTicketMutation();
 
-  const [updateUser, { isSuccessUser, isErrorUser, errorUser, isLoadingUser }] =
+  const [updateUser, { isSuccess: isSuccessUser, isError:isErrorUser, error:errorUser, isLoading: isLoadingUser }] =
     useUpdateUserMutation();
 
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const EditTicketForm = ({ ticket, users, students }) => {
   };
 
   useEffect(() => {
-    if ((isSuccess || isDelSuccess) && isSuccess) {
+    if ((isSuccess || isDelSuccess) && isSuccessUser) {
       setTitle("");
       setText("");
       setUserId("");
@@ -199,24 +199,24 @@ const EditTicketForm = ({ ticket, users, students }) => {
           onChange={onTextChanged}
         /></div>
 
-        <div class=" user_student_form_container">
+        <div className=" user_student_form_container">
       {options_tab}
       {!isStudent && <div className="form-group">
-      <label class="form-label" for="username">STUDENT</label>
+      <label class="form-label" htmlFor="username">STUDENT</label>
       <input
         type="text"
         id="username"
         name="username"
-        class="form-input"
+        className="form-input"
         value={studentName}
         onChange={handleStudentNameChange}
         autoComplete="off"
       />
       {showSuggestions && studentName !== "" && (
-        <ul class="form-suggestions">
+        <ul className="form-suggestions">
           {filteredSuggestions.map((suggestion) => (
             <li
-              class="form-suggestion"
+              className="form-suggestion"
               key={suggestion.id}
               onClick={() => handleOnStudentClicked(suggestion)}
             >
@@ -238,6 +238,7 @@ const EditTicketForm = ({ ticket, users, students }) => {
               <br />
               {updated}
             </p>
+            {!isStudent &&
             <label className="form-label" htmlFor="ticket-completed">
               WORK COMPLETE
               <input
@@ -248,10 +249,10 @@ const EditTicketForm = ({ ticket, users, students }) => {
                 checked={completed}
                 onChange={onCompletedChanged}
               />
-            </label>
+            </label>}
           </div>
         <div className="side-buttons tickets-buttons">
-                <button class="form-button edit-user-button" title="Save" onClick={onSaveTicketClicked} disabled={!canSave}>
+                <button className="form-button edit-user-button" title="Save" onClick={onSaveTicketClicked} disabled={!canSave}>
                     Save
                 </button>
                 {deleteButton}

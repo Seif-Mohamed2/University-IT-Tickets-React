@@ -120,7 +120,7 @@ const EditStudentForm = ({ student }) => {
                     />
                 </label>
                 <div className="side-buttons">
-                <button class="form-button edit-user-button" title="Save" onClick={onSaveStudentClicked} disabled={!canSave}>
+                <button className="form-button edit-user-button" title="Save" onClick={onSaveStudentClicked} disabled={!canSave}>
                     Save
                 </button>
                 <button

@@ -74,7 +74,7 @@ const NewUserForm = () => {
     const validPwdClass = !isValidPassword ? 'form__input--incomplete' : ''
 
     const content = (
-        <div class="form-container">
+        <div className="form-container">
             <p className={errClass}>{error?.data?.message}</p>
 
             <form className="form" onSubmit={onSaveUserClicked}>
@@ -123,8 +123,8 @@ const NewUserForm = () => {
                     {options}
                 </select>
                 </div>
-                <div class="form-actions">
-                <button class="form-button new-user-button" title="Save" disabled={!canSave}>
+                <div className="form-actions">
+                <button className="form-button new-user-button" title="Save" disabled={!canSave}>
                     Save
                 </button>
                 </div>

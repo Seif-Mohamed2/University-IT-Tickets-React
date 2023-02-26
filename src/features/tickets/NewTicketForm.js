@@ -33,12 +33,15 @@ const NewTicketForm = ({ users, students }) => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
-  const [studentName, setStudentName] = useState("");
 
+  let studentName_2 = "";
+  let studentId_2 = "";
   let user;
   if (!isStudent) {
     user = users.filter((foundUser) => foundUser.username === username)[0];
   } else {
+    studentName_2 = username;
+    studentId_2 = students.filter((st)=> st.username === username)[0].id;
     const FilteredEmployees = users.filter(
       (user) => !user.roles.includes("Manager") && !user.roles.includes("Admin")
     );
@@ -48,11 +51,10 @@ const NewTicketForm = ({ users, students }) => {
         user = FilteredEmployees[i];
       }
     }
-    //setUserId(user.id)
-    //I need user assigned tickets counter!
   }
   const [userId, setUserId] = useState(user.id);
-
+  const [studentName, setStudentName] = useState(studentName_2);
+  const [studentId, setStudentId] = useState(studentId_2);
   useEffect(() => {
     if (isSuccess && isSuccessUser && isSuccessStudent) {
       setTitle("");
@@ -69,7 +71,7 @@ const NewTicketForm = ({ users, students }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowsuggestions] = useState(false);
   const [accepted, setAccepted] = useState(false);
-  const [studentId, setStudentId] = useState("");
+
   const handleStudentNameChange = (e) => {
     setFilteredSuggestions(
       students.filter((suggestion) =>
@@ -91,9 +93,9 @@ const NewTicketForm = ({ users, students }) => {
   };
 
   const canSave =
-    [title, text, userId, studentName, accepted].every(Boolean) &&
+    [title, text, userId].every(Boolean) &&
     !isLoading &&
-    !isLoadingUser && !isLoadingStudent;
+    !isLoadingUser && !isLoadingStudent && (studentName || isStudent) && (accepted || isStudent);
   const onSaveTicketClicked = async (e) => {
     e.preventDefault();
     if (canSave) {
@@ -102,9 +104,7 @@ const NewTicketForm = ({ users, students }) => {
       )[0];
       const ticketNoNew = assignedUSer.ticketsNo + 1;
       const studentToUpdate = students.filter((student0)=>student0.id === studentId)[0];
-      console.log(studentToUpdate)
       const studentNewTicketsNo = studentToUpdate.ticketsNo + 1;
-      console.log(studentNewTicketsNo)
       await addNewTicket({ user: userId, title, text, student: studentId });
       await updateUser({ ...assignedUSer, ticketsNo: ticketNoNew });
       await updateStudent({...studentToUpdate, ticketsNo: studentNewTicketsNo})
@@ -147,15 +147,15 @@ const NewTicketForm = ({ users, students }) => {
   const errClass = isError || isErrorUser || isErrorStudent ? "errmsg" : "offscreen";
 
   const content = (
-    <div class="form-container">
-    <p class={errClass}>{error}</p>
-  <form class="form" onSubmit={onSaveTicketClicked}>
-    <h2 class="form-title">New Ticket</h2>
+    <div className="form-container">
+    <p className={errClass}>{error}</p>
+  <form className="form" onSubmit={onSaveTicketClicked}>
+    <h2 className="form-title">New Ticket</h2>
 
-    <div class="form-group">
-      <label class="form-label" for="title">TITLE</label>
+    <div className="form-group">
+      <label className="form-label" htmlFor="title">TITLE</label>
       <input
-        class="form-input"
+        className="form-input"
         id="title"
         name="title"
         type="text"
@@ -165,10 +165,10 @@ const NewTicketForm = ({ users, students }) => {
       />
     </div>
 
-    <div class="form-group">
-      <label class="form-label" for="text">CONTENT</label>
+    <div className="form-group">
+      <label className="form-label" htmlFor="text">CONTENT</label>
       <textarea
-        class="form-input form-textarea"
+        className="form-input form-textarea"
         id="text"
         name="text"
         value={text}
@@ -176,24 +176,24 @@ const NewTicketForm = ({ users, students }) => {
       ></textarea>
     </div>
 
-    <div class=" user_student_form_container">
+    <div className=" user_student_form_container">
       {options_tab}
       {!isStudent && <div className="form-group">
-      <label class="form-label" for="username">STUDENT</label>
+      <label className="form-label" htmlFor="username">STUDENT</label>
       <input
         type="text"
         id="username"
         name="username"
-        class="form-input"
+        className="form-input"
         value={studentName}
         onChange={handleStudentNameChange}
         autoComplete="off"
       />
       {showSuggestions && studentName !== "" && (
-        <ul class="form-suggestions">
+        <ul className="form-suggestions">
           {filteredSuggestions.map((suggestion) => (
             <li
-              class="form-suggestion"
+              className="form-suggestion"
               key={suggestion.id}
               onClick={() => handleOnStudentClicked(suggestion)}
             >
@@ -205,13 +205,13 @@ const NewTicketForm = ({ users, students }) => {
       </div>}
     </div>
 
-    <div class="form-actions">
-      <button class="form-button" title="Save" disabled={!canSave}>
+    <div className="form-actions">
+      <button className="form-button" title="Save" disabled={!canSave}>
         Save
       </button>
     </div>
 
-    <p class="form-error-message">
+    <p className="form-error-message">
       {error?.data?.message} {errorUser?.data?.message} {errorStudent?.data?.message}
     </p>
   </form>

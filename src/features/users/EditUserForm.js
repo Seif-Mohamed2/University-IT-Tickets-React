@@ -161,7 +161,7 @@ const EditUserForm = ({ user }) => {
                 </select>
                 </div>
                 <div className="side-buttons">
-                <button class="form-button edit-user-button" title="Save" onClick={onSaveUserClicked} disabled={!canSave}>
+                <button className="form-button edit-user-button" title="Save" onClick={onSaveUserClicked} disabled={!canSave}>
                     Save
                 </button>
                 <button
